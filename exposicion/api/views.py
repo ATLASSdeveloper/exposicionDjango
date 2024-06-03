@@ -45,7 +45,7 @@ class ArticuloViewSet(viewsets.ModelViewSet):
         articulo = request.query_params.get('articulo', None)
 
         if articulo is not None and articulo is not 'null':
-            inmuebles = Articulo.objects.filter(art_nombre__icontains=articulo)
+            inmuebles = Articulo.objects.filter(art_nombre__icontains=articulo) #__iexact
             serializer = self.get_serializer(inmuebles, many=True)
             return Response(serializer.data)
         else:

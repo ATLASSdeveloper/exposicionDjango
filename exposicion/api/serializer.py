@@ -12,6 +12,10 @@ class ArticuloSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class DetalleBodegaSerializer(serializers.ModelSerializer):
+
+    bodega_nombre = serializers.CharField(source='det_bod_bod.bod_nombre',read_only=True)
+    articulo_nombre = serializers.CharField(source='det_bod_art.art_nombre',read_only=True)
+
     class Meta:
         model = DetalleBodega
-        fields = '__all__'
+        fields = ['det_bod_id','det_bod_cantidad','det_bod_bod','det_bod_art','bodega_nombre','articulo_nombre']

@@ -4,6 +4,7 @@ from .models import *
 from .serializer import *
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.decorators import action
 
 
 class BodegaViewSet(viewsets.ModelViewSet):
@@ -39,6 +40,17 @@ class ArticuloViewSet(viewsets.ModelViewSet):
     queryset = Articulo.objects.all()
     serializer_class = ArticuloSerializer
 
+    @action(detail=False, methods=['get'])
+    def obtener_filtro_articulos(self, request):
+        articulo = request.query_params.get('articulo', None)
+
+        if articulo is not None and articulo is not 'null':
+            inmuebles = Articulo.objects.filter(art_nombre__icontains=articulo)
+            serializer = self.get_serializer(inmuebles, many=True)
+            return Response(serializer.data)
+        else:
+            return Response({'error': 'NO SE PROPORCIONO EL CAMPO'}, status=status.HTTP_400_BAD_REQUEST)
+
 class DetalleBodegaViewSet(viewsets.ModelViewSet):
     queryset = DetalleBodega.objects.all()
     serializer_class = DetalleBodegaSerializer
@@ -46,5 +58,6 @@ class DetalleBodegaViewSet(viewsets.ModelViewSet):
     # sobreescritura get
     def get_queryset(self):
         return DetalleBodega.objects.filter(det_bod_eliminado="no")
+    
 
     

@@ -25,7 +25,7 @@ Tener instalado Python con anterioridad para poder ejecutar el proyecto es recom
 ## Manual de instalación y configuracion básica del proyecto 
 
 ### Paso 1 
-Clonar el repositorio https://github.com/Invcontrol-Back/dasbackend
+Clonar el repositorio https://github.com/ATLASSdeveloper/exposicionDjango.git
 ### Paso 2
 Ingresar a la carpeta clonada, abrir una terminal
 ### Paso 3 
